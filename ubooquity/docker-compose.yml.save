@@ -1,0 +1,16 @@
+version: "2"
+services: 
+  ubooquity:
+    container_name: ubooquity
+    network_mode: bridge
+    image: linuxserver/ubooquity
+    restart: unless-stopped
+    volumes:
+      - "/home/${USER}/ubooquity:/root/ubooquity"
+      - "/home/${USER}/ubooquity/dotconfig:/root/.config/ubooquity"
+      - "/home/${USER}/zfs-a:/comics"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.ubooquity.entrypoints=web"
+      - "traefik.http.routers.ubooquity.rule=Host(`ubooquity.vm.ashurin.local`)"
+      - "traefik.http.services.ubooquity.loadbalancer.server.port=9000"

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  cloud:
+    container_name: cloud
+    image: nextcloud
+    restart: unless-stopped
+    volumes:
+      - "/home/${USER}/nextcloud/html:/var/www/html"
+      - "/home/${USER}/nextcloud/config:/var/www/html/config"
+      - "/home/${USER}/nextcloud/data:/var/www/html/data"
+      - "/home/${USER}/nextcloud/php.ini:/usr/local/etc/php/conf.d/zzz-custom.ini"
+      - "/home/${USER}/zfs-a:/external_media_1"
+      - "/home/${USER}/zfs-software:/external_media_2"
+      - "/home/${USER}/zfs-f:/external_media_3"
+      - "/home/${USER}/zfs-backup:/external_media_4"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.cloud.entrypoints=web"
+      - "traefik.http.routers.cloud.rule=Host(`cloud.vm.ashurin.local`)"
+      - "traefik.http.routers.cloud.middlewares=cloud-chain"
+      - "traefik.http.middlewares.cloud-chain.chain.middlewares=cloud-header,cloud-redirect"
+      - "traefik.http.middlewares.cloud-header.headers.stsSeconds=15552000"
+      - "traefik.http.middlewares.cloud-redirect.redirectregex.permanent=true"
+      - "traefik.http.middlewares.cloud-redirect.redirectregex.regex=https://(.*)/.well-known/(card|cal)dav"
+      - "traefik.http.middlewares.cloud-redirect.redirectregex.replacement=https://$$1/remote.php/dav/"
+    network_mode: bridge

@@ -1,0 +1,16 @@
+version: "2"
+services: 
+  mango:
+    container_name: mango
+    network_mode: bridge
+    image: hkalexling/mango
+    restart: unless-stopped
+    volumes:
+      - "/home/${USER}/mango:/root/mango"
+      - "/home/${USER}/mango/dotconfig:/root/.config/mango"
+      - "/home/${USER}/zfs-a:/external_media_1"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.mango.entrypoints=web"
+      - "traefik.http.routers.mango.rule=Host(`mango.vm.ashurin.local`)"
+      - "traefik.http.services.mango.loadbalancer.server.port=9000"

@@ -1,0 +1,16 @@
+version: "2"
+services: 
+  dashboard:
+    container_name: dashboard
+    network_mode: bridge
+    image: linuxserver/organizr
+    restart: unless-stopped
+    volumes:
+      - dashboard_data:/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.dashboard.entrypoints=web"
+      - "traefik.http.routers.dashboard.rule=Host(`vm.ashurin.local`)"
+
+volumes:
+  dashboard_data:

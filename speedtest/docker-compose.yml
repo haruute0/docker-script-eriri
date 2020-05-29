@@ -1,0 +1,11 @@
+version: "2"
+services: 
+  speedtest:
+    container_name: speedtest
+    network_mode: bridge
+    image: adolfintel/speedtest
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.speedtest.entrypoints=web"
+      - "traefik.http.routers.speedtest.rule=Host(`speedtest.vm.ashurin.local`)"

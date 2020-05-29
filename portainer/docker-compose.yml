@@ -1,0 +1,21 @@
+version: "2"
+services: 
+  portainer:
+    container_name: portainer
+    network_mode: bridge
+    image: portainer/portainer
+    restart: unless-stopped
+    ports:
+      - 8000:8000
+      - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.portainer.entrypoints=web"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.vm.ashurin.local`)"
+      - "traefik.http.services.portainer.loadbalancer.server.port=9000"
+
+volumes:
+  portainer_data:
