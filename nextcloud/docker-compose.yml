@@ -17,7 +17,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.cloud.entrypoints=web"
-      - "traefik.http.routers.cloud.rule=Host(`cloud.vm.ashurin.local`)"
+      - "traefik.http.routers.cloud.rule=Host(`cloud.eriri.lan`)"
       - "traefik.http.routers.cloud.middlewares=cloud-chain"
       - "traefik.http.middlewares.cloud-chain.chain.middlewares=cloud-header,cloud-redirect"
       - "traefik.http.middlewares.cloud-header.headers.stsSeconds=15552000"

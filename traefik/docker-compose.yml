@@ -25,5 +25,5 @@ services:
       # API
       - "traefik.enable=true"
       - "traefik.http.routers.traefik.entrypoints=web"
-      - "traefik.http.routers.traefik.rule=Host(`traefik.vm.ashurin.local`)"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.eriri.lan`)"
       - "traefik.http.routers.traefik.service=api@internal"

@@ -14,7 +14,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.portainer.entrypoints=web"
-      - "traefik.http.routers.portainer.rule=Host(`portainer.vm.ashurin.local`)"
+      - "traefik.http.routers.portainer.rule=Host(`portainer.eriri.lan`)"
       - "traefik.http.services.portainer.loadbalancer.server.port=9000"
 
 volumes:

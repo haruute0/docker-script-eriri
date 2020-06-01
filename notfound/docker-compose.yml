@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+    notfound:
+        image: nginx
+        container_name: notfound
+        restart: unless-stopped
+        network_mode: bridge
+        volumes:
+        - /home/${USER}/notfound:/usr/share/nginx/html:ro
+        labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.notfound.entrypoints=web"
+        - "traefik.http.routers.notfound.rule=HostRegexp(`{catchall:.*}`)"
+        - "traefik.http.routers.notfound.priority=1"

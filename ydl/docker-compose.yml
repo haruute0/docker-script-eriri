@@ -8,5 +8,5 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ydl.entrypoints=web"
-      - "traefik.http.routers.ydl.rule=Host(`ydl.vm.ashurin.local`)"
+      - "traefik.http.routers.ydl.rule=Host(`ydl.eriri.lan`)"
       - "traefik.http.services.ydl.loadbalancer.server.port=17442"

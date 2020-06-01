@@ -14,5 +14,5 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.ubooquity.entrypoints=web"
-      - "traefik.http.routers.ubooquity.rule=Host(`comics.vm.ashurin.local`)"
+      - "traefik.http.routers.ubooquity.rule=Host(`comics.eriri.lan`)"
       - "traefik.http.services.ubooquity.loadbalancer.server.port=2202"

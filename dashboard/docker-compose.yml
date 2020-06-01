@@ -3,14 +3,12 @@ services:
   dashboard:
     container_name: dashboard
     network_mode: bridge
-    image: linuxserver/organizr
+    image: b4bz/homer:latest
     restart: unless-stopped
     volumes:
-      - dashboard_data:/config
+      - /home/${USER}/homer:/www
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.entrypoints=web"
-      - "traefik.http.routers.dashboard.rule=Host(`vm.ashurin.local`)"
-
-volumes:
-  dashboard_data:
+      - "traefik.http.routers.dashboard.rule=Host(`eriri.lan`)"
+      - "traefik.http.services.dashboard.loadbalancer.server.port=8080"
